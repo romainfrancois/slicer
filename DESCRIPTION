@@ -14,3 +14,4 @@ Imports:
 RoxygenNote: 6.1.1
 LinkingTo: 
     Rcpp
+SystemRequirements: C++11

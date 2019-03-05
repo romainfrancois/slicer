@@ -1,4 +1,6 @@
 // to manipulate R objects, aka SEXP
+#include <Rcpp.h>
+
 #include <R.h>
 #include <Rinternals.h>
 #include <Rversion.h>
@@ -26,3 +28,13 @@ extern "C" {
 #else
 #include <R_ext/Altrep.h>
 #endif
+
+// disabling exception handling
+// because this is all essentially safe C code here
+//
+// just using Rcpp for the attributes
+#undef BEGIN_RCPP
+#define BEGIN_RCPP
+
+#undef END_RCPP
+#define END_RCPP
