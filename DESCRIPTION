@@ -9,5 +9,8 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     vctrs,
-    rlang
+    rlang,
+    Rcpp
 RoxygenNote: 6.1.1
+LinkingTo: 
+    Rcpp
