@@ -1,0 +1,13 @@
+Package: slicer
+Title: Vector slicers
+Version: 0.0.0.9000
+Authors@R: person("Romain", "François", email = "romain@purrple.cat", role = c("aut", "cre"))
+Description: Vector slicers.
+Depends: R (>= 3.5.2)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    vctrs,
+    rlang
+RoxygenNote: 6.1.1
