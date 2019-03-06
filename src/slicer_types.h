@@ -33,8 +33,20 @@ extern "C" {
 // because this is all essentially safe C code here
 //
 // just using Rcpp for the attributes
+//
 #undef BEGIN_RCPP
 #define BEGIN_RCPP
 
 #undef END_RCPP
 #define END_RCPP
+
+#define COMPACT_SEQ_INFO(x) R_altrep_data1(x)
+#define COMPACT_SEQ_EXPANDED(x) R_altrep_data2(x)
+
+#define COMPACT_LENGTH(info) REAL0(info)[0]
+#define COMPACT_FIRST(info) REAL0(info)[1]
+#define COMPACT_INCR(info) REAL0(info)[2]
+
+SEXP slicer_int_compact_plus_one(SEXP x, SEXP idx);
+SEXP slicer_int_compact_minus_one(SEXP x, SEXP idx);
+SEXP slicer_int_abritrary(SEXP x, SEXP idx);
