@@ -59,15 +59,17 @@ struct SlicerCompactPlusOne {
 template <typename value_type, int RTYPE>
 R_altrep_class_t SlicerCompactPlusOne<value_type, RTYPE>::class_t;
 
-template <>
-R_altrep_class_t SlicerCompactPlusOne<double, REALSXP>::Init_Class(DllInfo* dll) {
-  return R_make_altreal_class("slicer_compact_plus_one_REALSXP", "slicer", dll);
-}
+#define FINISH_SLICER_COMPACT(_value_type_, _RTYPE_, _name_)                 \
+  template <>                                                  \
+  R_altrep_class_t SlicerCompactPlusOne<_value_type_, _RTYPE_>::Init_Class(DllInfo* dll) {  \
+    return R_make_alt ## _name_ ## _class("slicer_compact_plus_one_" # _name_, "slicer", dll) ;\
+  } \
+  template <>                                                            \
+  void SlicerCompactPlusOne<double, REALSXP>::Init_Elt() {     \
+    R_set_alt ## _name_ ## _Elt_method(class_t, Elt);          \
+  }
 
-template <>
-void SlicerCompactPlusOne<double, REALSXP>::Init_Elt() {
-  R_set_altreal_Elt_method(class_t, Elt);
-}
+FINISH_SLICER_COMPACT(double, REALSXP, real)
 
 // [[Rcpp::init]]
 void init_slicer_compact_plus_one(DllInfo* dll) {
