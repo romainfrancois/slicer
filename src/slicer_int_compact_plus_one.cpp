@@ -65,14 +65,18 @@ R_altrep_class_t SlicerCompactPlusOne<value_type, RTYPE>::class_t;
     return R_make_alt ## _name_ ## _class("slicer_compact_plus_one_" # _name_, "slicer", dll) ;\
   } \
   template <>                                                            \
-  void SlicerCompactPlusOne<double, REALSXP>::Init_Elt() {     \
+  void SlicerCompactPlusOne<_value_type_, _RTYPE_>::Init_Elt() {     \
     R_set_alt ## _name_ ## _Elt_method(class_t, Elt);          \
   }
 
+FINISH_SLICER_COMPACT(int, INTSXP, integer)
 FINISH_SLICER_COMPACT(double, REALSXP, real)
+
+// TODO: also complex, ... in R 3.6
 
 // [[Rcpp::init]]
 void init_slicer_compact_plus_one(DllInfo* dll) {
+  SlicerCompactPlusOne<int, INTSXP>::Init(dll);
   SlicerCompactPlusOne<double, REALSXP>::Init(dll);
 }
 
@@ -83,6 +87,7 @@ void init_slicer_compact_plus_one(DllInfo* dll) {
 SEXP slicer_int_compact_plus_one(SEXP x, SEXP idx){
   switch(TYPEOF(x)) {
   case REALSXP: return SlicerCompactPlusOne<double, REALSXP>::Make(x, idx);
+  case INTSXP: return SlicerCompactPlusOne<int, INTSXP>::Make(x, idx);
   default:
     break;
   }
