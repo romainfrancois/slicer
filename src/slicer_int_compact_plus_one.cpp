@@ -1,4 +1,4 @@
-#include "slicer_types.h"
+#include "slicer.h"
 
 template <typename value_type, int RTYPE>
 struct SlicerCompactPlusOne {
@@ -74,7 +74,7 @@ FINISH_SLICER_COMPACT(double, REALSXP, real)
 
 // TODO: also complex, ... in R 3.6
 
-// [[Rcpp::init]]
+// [[init]]
 void init_slicer_compact_plus_one(DllInfo* dll) {
   SlicerCompactPlusOne<int, INTSXP>::Init(dll);
   SlicerCompactPlusOne<double, REALSXP>::Init(dll);

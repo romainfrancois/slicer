@@ -1,4 +1,4 @@
-#include "slicer_types.h"
+#include "slicer.h"
 
 bool is_compact(SEXP idx) {
   static SEXP s_compact_intseq = Rf_install("compact_intseq");
@@ -17,7 +17,7 @@ inline SEXP slicer_int_compact(SEXP x, SEXP idx) {
   return COMPACT_INCR(COMPACT_SEQ_INFO(idx)) == 1 ? slicer_int_compact_plus_one(x, idx) : slicer_int_compact_minus_one(x, idx);
 }
 
-// [[Rcpp::export(rng = false)]]
+// [[export]]
 SEXP slicer_int(SEXP x, SEXP idx){
   // if we are here, we know a few things
   // 1) x   is a bare vector
